@@ -1,0 +1,63 @@
+server:
+  port: 1919
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      discovery:
+        server:
+          webmvc:
+            routes:
+              - id: item-service
+                uri: lb://item-service
+                predicates:
+                  - Path=/items/**
+
+              - id: CustomerService
+                uri: lb://CustomerService
+                predicates:
+                  - Path=/Customer/**
+
+              - id: DeliveryService
+                uri: lb://DeliveryService
+                predicates:
+                  - Path=/delivery/**
+
+              - id: MenuService
+                uri: lb://MenuService
+                predicates:
+                  - Path=/menu/**
+
+              - id: OrderService
+                uri: lb://OrderService
+                predicates:
+                  - Path=/orders/**
+
+              - id: PaymentService
+                uri: lb://PaymentService
+                predicates:
+                  - Path=/Payment/**
+
+              - id: ReviewService
+                uri: lb://ReviewService
+                predicates:
+                  - Path=/Review/**
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost  
+
+
+
+
+
+
+
